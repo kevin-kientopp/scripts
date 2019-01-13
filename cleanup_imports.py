@@ -1,9 +1,7 @@
-import sys
 import re
+import sys
 
-def cleanup_imports():
-    filename = sys.argv[1]
-
+def cleanup_imports(filename):
     with open(filename) as f:
         lines = f.readlines()
 
@@ -20,6 +18,10 @@ def cleanup_imports():
     
     with open(filename, 'w') as w:
         w.writelines(lines)
+        
+if len(sys.argv) < 2:
+    sys.exit('Usage: python cleanup_imports.py [file ...]')
 
-if __name__ == '__main__':
-    cleanup_imports()
+filenames = sys.argv[1:]
+for filename in filenames:
+    cleanup_imports(filename)
